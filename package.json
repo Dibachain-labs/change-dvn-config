@@ -1,0 +1,33 @@
+{
+  "name": "mansory-dvn-wire",
+  "version": "1.0.0",
+  "private": true,
+  "description": "LayerZero V2 DVN/confirmation update for Mansory OApp (Solana 30168 <-> BSC 30102). One command wires both sides.",
+  "scripts": {
+    "wire:dry": "hardhat lz:oapp:wire --oapp-config layerzero.config.ts --ci --dry-run",
+    "wire": "hardhat lz:oapp:wire --oapp-config layerzero.config.ts --ci",
+    "wire:all": "npm run config:get && npm run wire:dry && npm run wire && npm run config:get",
+    "peers:get": "hardhat lz:oapp:peers:get --oapp-config layerzero.config.ts",
+    "config:get": "hardhat lz:oapp:config:get --oapp-config layerzero.config.ts",
+    "config:get:default": "hardhat lz:oapp:config:get:default --networks bsc-mainnet,solana-mainnet"
+  },
+  "devDependencies": {
+    "@layerzerolabs/devtools-evm-hardhat": "~3.0.0",
+    "@layerzerolabs/devtools-solana": "~3.0.0",
+    "@layerzerolabs/lz-definitions": "~3.0.59",
+    "@layerzerolabs/lz-v2-utilities": "~3.0.59",
+    "@layerzerolabs/oapp-evm": "~0.3.0",
+    "@layerzerolabs/toolbox-hardhat": "~0.6.0",
+    "@nomicfoundation/hardhat-ethers": "^3.0.5",
+    "@solana/web3.js": "^1.95.0",
+    "dotenv": "^16.4.5",
+    "ethers": "^6.13.0",
+    "hardhat": "^2.22.10",
+    "hardhat-deploy": "^0.12.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  },
+  "overrides": {
+    "ethers": "^6.13.0"
+  }
+}

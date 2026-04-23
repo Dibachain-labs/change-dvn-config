@@ -1,0 +1,59 @@
+{
+  "_comment": "AUDIT REFERENCE ONLY. The wire task in layerzero.config.ts is the source of truth. Use this file to manually diff against on-chain BSC ULN state.",
+  "network": "bsc-mainnet",
+  "eid": 30102,
+  "remote": {
+    "eid": 30168,
+    "name": "solana-mainnet",
+    "peer": "8nULvjDGGykWnwd6mogRm9i7Y5D5M47S2YNwZrPf8bUN"
+  },
+  "libraries": {
+    "endpointV2": "0x1a44076050125825900e736c501f859c50fE728c",
+    "sendUln302": "0x9F8C645f2D0b2159767Bd6E0839DE4BE49e823DE",
+    "receiveUln302": "0xB217266c3A98C8B2709Ee26836C98cf12f6cCEC1",
+    "executor": "0x3ebD570ed38B1b3b4BC886999fcF507e9D584859"
+  },
+  "sendUlnConfig": {
+    "confirmations": 20,
+    "requiredDVNCount": 4,
+    "optionalDVNCount": 0,
+    "optionalDVNThreshold": 0,
+    "requiredDVNs": [
+      "0x439264fb87581a70bb6d7befd16b636521b0ad2d",
+      "0x534c6b3e6805e9287ff1d49c349d5f7a01b9b7f5",
+      "0xf0a5c5306adbfd4e3dfd5d4b148b451c411d3878",
+      "0xfa9ba83c102283958b997adc8b44ed3a3cdb5dda"
+    ],
+    "optionalDVNs": []
+  },
+  "receiveUlnConfig": {
+    "confirmations": 20,
+    "requiredDVNCount": 4,
+    "optionalDVNCount": 0,
+    "optionalDVNThreshold": 0,
+    "requiredDVNs": [
+      "0x439264fb87581a70bb6d7befd16b636521b0ad2d",
+      "0x534c6b3e6805e9287ff1d49c349d5f7a01b9b7f5",
+      "0xf0a5c5306adbfd4e3dfd5d4b148b451c411d3878",
+      "0xfa9ba83c102283958b997adc8b44ed3a3cdb5dda"
+    ],
+    "optionalDVNs": []
+  },
+  "executorConfig": {
+    "maxMessageSize": 10000,
+    "executor": "0x3ebD570ed38B1b3b4BC886999fcF507e9D584859"
+  },
+  "enforcedOptions": [
+    {
+      "msgType": 1,
+      "label": "SEND",
+      "options": "0x00030100110100000000000000000000000000013880",
+      "decoded": { "lzReceive": { "gas": 80000, "value": 0 } }
+    },
+    {
+      "msgType": 2,
+      "label": "SEND_AND_CALL",
+      "options": "0x0003"
+    }
+  ]
+}

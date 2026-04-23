@@ -1,0 +1,62 @@
+{
+  "_comment": "AUDIT REFERENCE ONLY. The wire task in layerzero.config.ts is the source of truth. Use this file to manually diff against on-chain Solana ULN/Executor state.",
+  "network": "solana-mainnet",
+  "eid": 30168,
+  "oapp": "8nULvjDGGykWnwd6mogRm9i7Y5D5M47S2YNwZrPf8bUN",
+  "owner": "CZ7DsdcWaCvLLQUHyWRPoB8QvN2PhoW74fi7oxJTh6Jg",
+  "delegate": "CZ7DsdcWaCvLLQUHyWRPoB8QvN2PhoW74fi7oxJTh6Jg",
+  "remote": {
+    "eid": 30102,
+    "name": "bsc-mainnet",
+    "peer": "0x0fcfe33b46e5b21e5e96b722d4c85510198f9255"
+  },
+  "sendLibrary": {
+    "program": "7a4WjyR8VZ7yZz5XJAKm39BUGn5iT9CKcv2pmG9tdXVH",
+    "executor": {
+      "maxMessageSize": 10000,
+      "executorAddress": "AwrbHeCyniXaQhiJZkLhgWdUCteeWSGaSN1sTfLiY7xK"
+    },
+    "uln": {
+      "confirmations": 20,
+      "requiredDvnCount": 4,
+      "optionalDvnCount": 0,
+      "optionalDvnThreshold": 0,
+      "requiredDvns": [
+        "29EKzmCscUg8mf4f5uskwMqvu2SXM8hKF1gWi1cCBoKT",
+        "7jMeX5mzXnSSKYd8DxBDP4xMnkNFZZZm5W28FWUTbwU3",
+        "Fn8yyjaLbqw9FZyyLaTkb8o8RWp3vztxNChtPxcV1cLV",
+        "FxFxe8j7e2xgpP9bw8LUehmz7DoQXaNFadJMEUKwBcRs"
+      ],
+      "optionalDvns": []
+    }
+  },
+  "receiveLibrary": {
+    "program": "7a4WjyR8VZ7yZz5XJAKm39BUGn5iT9CKcv2pmG9tdXVH",
+    "uln": {
+      "confirmations": 20,
+      "requiredDvnCount": 4,
+      "optionalDvnCount": 0,
+      "optionalDvnThreshold": 0,
+      "requiredDvns": [
+        "29EKzmCscUg8mf4f5uskwMqvu2SXM8hKF1gWi1cCBoKT",
+        "7jMeX5mzXnSSKYd8DxBDP4xMnkNFZZZm5W28FWUTbwU3",
+        "Fn8yyjaLbqw9FZyyLaTkb8o8RWp3vztxNChtPxcV1cLV",
+        "FxFxe8j7e2xgpP9bw8LUehmz7DoQXaNFadJMEUKwBcRs"
+      ],
+      "optionalDvns": []
+    }
+  },
+  "enforcedOptions": [
+    {
+      "msgType": 1,
+      "label": "SEND",
+      "options": "0x00030100110100000000000000000000000000013880",
+      "decoded": { "lzReceive": { "gas": 80000, "value": 0 } }
+    },
+    {
+      "msgType": 2,
+      "label": "SEND_AND_CALL",
+      "options": "0x0003"
+    }
+  ]
+}
