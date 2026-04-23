@@ -5,38 +5,100 @@
 
 ---
 
-## TL;DR for the developer
+## Step-by-step (do this in order)
 
-```bash
-# 1. Install
+### 1. Install dependencies
+```powershell
 npm install --legacy-peer-deps
+```
 
-# 2. Secrets
-cp .env.example .env
-# fill PRIVATE_KEY (BSC delegate) and put Solana keypair at ./keys/delegate.json
-# (Solana keypair pubkey MUST equal CZ7DsdcWaCvLLQUHyWRPoB8QvN2PhoW74fi7oxJTh6Jg)
+### 2. Configure the BSC signer
+```powershell
+copy .env.example .env
+notepad .env
+```
+Fill in `PRIVATE_KEY=` with the **private key of the address that is set as
+delegate on the BSC Endpoint for this OApp**. (Verify with `npm run config:get`
+after install if unsure.)
 
-# 3. Single command — wires BOTH chains in one shot
+### 3. Provide the Solana delegate keypair
+The wire task needs a JSON keypair file at `./keys/delegate.json` whose public
+key equals **`CZ7DsdcWaCvLLQUHyWRPoB8QvN2PhoW74fi7oxJTh6Jg`**.
+
+Pick **one** of the options below.
+
+#### 3a. You already have the keypair JSON
+Just copy it:
+```powershell
+mkdir keys
+copy <path-to-existing-keypair.json> keys\delegate.json
+```
+
+#### 3b. You only have a 12 / 24-word mnemonic OR a Phantom-style secret key
+Use the included helper:
+```powershell
+npm run keypair
+```
+It will ask you to choose the input format and paste:
+- a BIP39 mnemonic (12 or 24 words), **or**
+- a base58 secret key (Phantom → Settings → Manage Accounts → Show Private Key), **or**
+- a hex secret key.
+
+It writes `keys/delegate.json` with `0o600` permissions and verifies the
+resulting public key equals the expected delegate. If the pubkey does NOT
+match, the script exits with a non-zero code and you must NOT proceed.
+
+#### 3c. You don't have the keys at all
+Stop. Ask the developer who originally deployed the Solana OApp — only that
+person can produce a keypair for `CZ7Dsdc…h6Jg`. **Do not** receive the file by
+email/Telegram/Slack; use a secure channel and delete it after wiring.
+
+### 4. Sanity check
+```powershell
+npm run config:get
+```
+Confirms the script can talk to both endpoints and prints the current values.
+
+### 5. Dry-run
+```powershell
+npm run wire:dry
+```
+Review every queued transaction. Required DVNs must match the lists in this
+README; confirmations must be `20`; enforced options should not appear (they
+are unchanged).
+
+### 6. Execute
+```powershell
+npm run wire
+```
+Both chains are wired in this single command:
+- BSC: `setSendConfig` + `setReceiveConfig` (signed with `PRIVATE_KEY`).
+- Solana: equivalent ULN/Executor instructions (signed with the keypair file).
+
+### 7. Verify
+```powershell
+npm run config:get
+```
+Diff the output against [reference/solana.uln.config.json](reference/solana.uln.config.json)
+and [reference/bsc.uln.config.json](reference/bsc.uln.config.json). Every value
+must match.
+
+### 8. Clean up secrets
+```powershell
+Remove-Item .\keys\delegate.json
+```
+(Or move it back to a vault. Do not leave it on disk.)
+
+---
+
+## Or: one-shot
+
+If you trust the dry-run output enough to chain everything:
+```powershell
 npm run wire:all
 ```
-
-`npm run wire:all` chains four things and stops on the first error:
-1. `config:get`  — print current on-chain config (audit before)
-2. `wire:dry`    — dry-run, prints every tx that would be sent
-3. `wire`        — executes (sends BSC txs + Solana ixs in one task)
-4. `config:get`  — print final on-chain config (audit after)
-
-If you prefer a manual flow:
-
-```bash
-npm run config:get   # see what's currently on-chain
-npm run wire:dry     # see what will change (no tx sent)
-npm run wire         # execute on BSC + Solana
-```
-
-> **The `lz:oapp:wire` task processes every connection in `layerzero.config.ts`.
-> Both `Solana → BSC` and `BSC → Solana` are wired in one invocation, with the
-> proper signer per chain (BSC: `PRIVATE_KEY`; Solana: `SOLANA_KEYPAIR_PATH`).**
+This runs `config:get → wire:dry → wire → config:get` and stops on the first
+error.
 
 ---
 
