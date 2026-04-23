@@ -67,7 +67,8 @@ const BSC_REQUIRED_DVNS: string[] = [
     '0xfa9ba83c102283958b997adc8b44ed3a3cdb5dda',
 ]
 
-const CONFIRMATIONS = BigInt(20)
+const CONFIRMATIONS20 = BigInt(20)
+const CONFIRMATIONS32 = BigInt(32)
 const MAX_MESSAGE_SIZE = 10_000
 
 // ═════════════════════════════════════════════════════════════════════════════
@@ -126,7 +127,7 @@ const config: OAppOmniGraphHardhat = {
                         executor: SOLANA_EXECUTOR,
                     },
                     ulnConfig: {
-                        confirmations: CONFIRMATIONS,
+                        confirmations: CONFIRMATIONS32,
                         requiredDVNs: SOLANA_REQUIRED_DVNS,
                         optionalDVNs: [],
                         optionalDVNThreshold: 0,
@@ -134,7 +135,7 @@ const config: OAppOmniGraphHardhat = {
                 },
                 receiveConfig: {
                     ulnConfig: {
-                        confirmations: CONFIRMATIONS,
+                        confirmations: CONFIRMATIONS20,
                         requiredDVNs: SOLANA_REQUIRED_DVNS,
                         optionalDVNs: [],
                         optionalDVNThreshold: 0,
@@ -160,7 +161,7 @@ const config: OAppOmniGraphHardhat = {
                         executor: BSC_EXECUTOR,
                     },
                     ulnConfig: {
-                        confirmations: CONFIRMATIONS,
+                        confirmations: CONFIRMATIONS20,
                         requiredDVNs: BSC_REQUIRED_DVNS,
                         optionalDVNs: [],
                         optionalDVNThreshold: 0,
@@ -168,7 +169,7 @@ const config: OAppOmniGraphHardhat = {
                 },
                 receiveConfig: {
                     ulnConfig: {
-                        confirmations: CONFIRMATIONS,
+                        confirmations: CONFIRMATIONS32,
                         requiredDVNs: BSC_REQUIRED_DVNS,
                         optionalDVNs: [],
                         optionalDVNThreshold: 0,
